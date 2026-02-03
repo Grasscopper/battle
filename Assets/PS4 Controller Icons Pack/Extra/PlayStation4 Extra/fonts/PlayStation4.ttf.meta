@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 3a768c81e743b4e80a2efa35c51c0af4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PlayStation4
+  fontNames:
+  - PlayStation4
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b0cadaa13a390b2459139beecda99c21, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

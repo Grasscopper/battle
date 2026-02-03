@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'PlayStation4';
+  src:  url('fonts/PlayStation4.eot?jsg2t0');
+  src:  url('fonts/PlayStation4.eot?jsg2t0#iefix') format('embedded-opentype'),
+    url('fonts/PlayStation4.ttf?jsg2t0') format('truetype'),
+    url('fonts/PlayStation4.woff?jsg2t0') format('woff'),
+    url('fonts/PlayStation4.svg?jsg2t0#PlayStation4') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'PlayStation4' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-PS4_Button-Circle-Outline:before {
+  content: "\71";
+}
+.icon-PS4_Button-Circle:before {
+  content: "\77";
+}
+.icon-PS4_Button-Cross-Outline:before {
+  content: "\65";
+}
+.icon-PS4_Button-Cross:before {
+  content: "\72";
+}
+.icon-PS4_Button-Square-Outline:before {
+  content: "\74";
+}
+.icon-PS4_Button-Square:before {
+  content: "\79";
+}
+.icon-PS4_Button-Triangle-Outline:before {
+  content: "\75";
+}
+.icon-PS4_Button-Triangle:before {
+  content: "\69";
+}
+.icon-PS4_D-Pad-Down:before {
+  content: "\6f";
+}
+.icon-PS4_D-Pad-Left:before {
+  content: "\70";
+}
+.icon-PS4_D-Pad-Right:before {
+  content: "\61";
+}
+.icon-PS4_D-Pad-Up:before {
+  content: "\73";
+}
+.icon-PS4_D-Pad:before {
+  content: "\64";
+}
+.icon-PS4_L1:before {
+  content: "\66";
+}
+.icon-PS4_L2:before {
+  content: "\67";
+}
+.icon-PS4_Left-Stick:before {
+  content: "\68";
+}
+.icon-PS4_Options:before {
+  content: "\6a";
+}
+.icon-PS4_Play-Station-Logo:before {
+  content: "\6b";
+}
+.icon-PS4_R1:before {
+  content: "\6c";
+}
+.icon-PS4_R2:before {
+  content: "\7a";
+}
+.icon-PS4_Right-Stick:before {
+  content: "\78";
+}
+.icon-PS4_Share:before {
+  content: "\63";
+}
+

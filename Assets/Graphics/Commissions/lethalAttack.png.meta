@@ -1,0 +1,379 @@
+fileFormatVersion: 2
+guid: 15464aeeaa2b447baa4570131162983f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5904501919026201001
+    second: lethalAttack_0
+  - first:
+      213: -2067353260193454290
+    second: lethalAttack_01
+  - first:
+      213: 4155982739115761027
+    second: lethalAttack_2
+  - first:
+      213: 6134462465689997574
+    second: lethalAttack_3
+  - first:
+      213: 8561865674913109243
+    second: lethalAttack_4
+  - first:
+      213: -88285707929056234
+    second: lethalAttack_5
+  - first:
+      213: 3419653604156154190
+    second: lethalAttack_6
+  - first:
+      213: 229065289157415967
+    second: lethalAttack_7
+  - first:
+      213: 288567001780343150
+    second: lethalAttack_8
+  - first:
+      213: 2493141695634561345
+    second: lethalAttack_9
+  - first:
+      213: 6229782866310841779
+    second: lethalAttack_10
+  - first:
+      213: -6351131966321931041
+    second: RapierAttack_11
+  - first:
+      213: 3926889975077544320
+    second: RapierAttack_12
+  - first:
+      213: 465296917968092501
+    second: RapierAttack_13
+  - first:
+      213: -6765086765926038623
+    second: RapierAttack_14
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lethalAttack_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 0
+        width: 89
+        height: 101
+      alignment: 9
+      pivot: {x: 0.50000024, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09f307cc3f554e399989403e4a8143d
+      internalID: 5904501919026201001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_01
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 0
+        width: 103
+        height: 101
+      alignment: 9
+      pivot: {x: 0.57555735, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5424a1d1814bf45a2a8dd260313549ee
+      internalID: -2067353260193454290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_2
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 0
+        width: 112
+        height: 101
+      alignment: 9
+      pivot: {x: 0.54864067, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ed3c29ff05c049029dbb8f29d3ec2b8
+      internalID: 4155982739115761027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_3
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 0
+        width: 134
+        height: 101
+      alignment: 9
+      pivot: {x: 0.40998134, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6722b5198f73942659b2faaf70dcebf1
+      internalID: 6134462465689997574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 0
+        width: 202
+        height: 103
+      alignment: 9
+      pivot: {x: 0.21490479, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61f97b211e2f4d5cb389ae260cce551
+      internalID: 8561865674913109243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 0
+        width: 233
+        height: 101
+      alignment: 9
+      pivot: {x: 0.21609536, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d22c938636a1e4761b43dfec648cbc69
+      internalID: -88285707929056234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_6
+      rect:
+        serializedVersion: 2
+        x: 2140
+        y: 0
+        width: 219
+        height: 108
+      alignment: 9
+      pivot: {x: 0.14286575, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4f1ea437eaa4436808d37b9061ff3c
+      internalID: 3419653604156154190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_7
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 0
+        width: 213
+        height: 106
+      alignment: 9
+      pivot: {x: 0.1382856, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ab3beff71b4445389b0043554b53e82
+      internalID: 229065289157415967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_8
+      rect:
+        serializedVersion: 2
+        x: 2818
+        y: 0
+        width: 218
+        height: 106
+      alignment: 9
+      pivot: {x: 0.1305178, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc8d082d8f7e944c3ab450901627ad24
+      internalID: 288567001780343150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_9
+      rect:
+        serializedVersion: 2
+        x: 3158
+        y: 0
+        width: 202
+        height: 103
+      alignment: 9
+      pivot: {x: 0.15133697, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be1145a111244a5786ed5795d835f2d
+      internalID: 2493141695634561345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lethalAttack_10
+      rect:
+        serializedVersion: 2
+        x: 3497
+        y: 0
+        width: 195
+        height: 102
+      alignment: 9
+      pivot: {x: 0.18549429, y: 0.49338}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4c00b3cba5c444c1ad391ac270465aa
+      internalID: 6229782866310841779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
