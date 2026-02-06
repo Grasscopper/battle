@@ -21,14 +21,14 @@ jobs:
         with:
           unityVersion: 6000.3.6f1
           targetPlatform: WebGL
-          projectPath: haldom
+          projectPath: .
           allowDirtyBuild: true
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: web-build
-          path: haldom/Builds/WebGL/
+          path: ./Builds/WebGL/
 
 
   # ---------- STAGING DEPLOY ----------
