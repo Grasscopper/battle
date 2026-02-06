@@ -1,0 +1,160 @@
+name: Build and Deploy Unity Web
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+
+jobs:
+
+  # ---------- BUILD JOB ----------
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v2
+        with:
+          PersonalLicense: true
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+      - name: Build Unity Web
+        uses: game-ci/unity-builder@v3
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.3.6f1
+          targetPlatform: WebGL
+          allowDirtyBuild: true
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web-build
+          path: build/
+
+  # ---------- STAGING DEPLOY ----------
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: web-build
+
+      - name: Configure AWS Credentials (STAGING)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
+          aws-region: us-east-1
+
+      - name: Sync build to STAGING bucket
+        run: |
+          cd build
+
+          # Upload all files
+          aws s3 sync . s3://staging.haldom.net/ --delete
+
+          # JS
+          for file in $(find . -name "*.js.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://staging.haldom.net/${outfile#./}" \
+              --content-type "application/javascript" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+          # DATA
+          for file in $(find . -name "*.data.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://staging.haldom.net/${outfile#./}" \
+              --content-type "application/octet-stream" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+          # WASM
+          for file in $(find . -name "*.wasm.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://staging.haldom.net/${outfile#./}" \
+              --content-type "application/wasm" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+      - name: Invalidate STAGING CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id d2qchnc5zprwef \
+            --paths "/*"
+
+  # ---------- PRODUCTION DEPLOY ----------
+  deploy-production:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: web-build
+
+      - name: Configure AWS Credentials (PRODUCTION)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Sync build to PRODUCTION bucket
+        run: |
+          cd build
+
+          aws s3 sync . s3://haldom.net/ --delete
+
+          # JS
+          for file in $(find . -name "*.js.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://haldom.net/${outfile#./}" \
+              --content-type "application/javascript" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+          # DATA
+          for file in $(find . -name "*.data.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://haldom.net/${outfile#./}" \
+              --content-type "application/octet-stream" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+          # WASM
+          for file in $(find . -name "*.wasm.gz"); do
+            outfile="${file%.gz}"
+            aws s3 cp "$file" "s3://haldom.net/${outfile#./}" \
+              --content-type "application/wasm" \
+              --content-encoding "gzip" \
+              --metadata-directive REPLACE
+          done
+
+      - name: Invalidate PRODUCTION CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E25J6ZW46HS9ZK \
+            --paths "/*"
