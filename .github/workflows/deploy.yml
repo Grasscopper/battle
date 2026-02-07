@@ -14,22 +14,21 @@ jobs:
 
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Build Unity Web
         uses: game-ci/unity-builder@v4
-        with:
-          unityVersion: 6000.3.6f1
-          targetPlatform: WebGL
-          projectPath: battle
-          allowDirtyBuild: true
+		with:
+	 	  unityVersion: 6000.3.6f1
+	  	  targetPlatform: Web
+	  	  projectPath: battle
+		  allowDirtyBuild: true
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: web-build
-          path: battle/Builds/WebGL/
-
+          path: battle/Build/
 
   # ---------- STAGING DEPLOY ----------
   deploy-staging:
@@ -51,8 +50,9 @@ jobs:
 
       - name: Sync build to STAGING bucket
         run: |
-          cd ./web-build
+          cd build
 
+          # Upload all files
           aws s3 sync . s3://staging.haldom.net/ --delete
 
           # JS
@@ -88,7 +88,6 @@ jobs:
             --distribution-id d2qchnc5zprwef \
             --paths "/*"
 
-
   # ---------- PRODUCTION DEPLOY ----------
   deploy-production:
     needs: build
@@ -109,7 +108,7 @@ jobs:
 
       - name: Sync build to PRODUCTION bucket
         run: |
-          cd ./web-build
+          cd build
 
           aws s3 sync . s3://haldom.net/ --delete
 
