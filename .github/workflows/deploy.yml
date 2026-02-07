@@ -16,11 +16,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v2
+        with:
+          PersonalLicense: true
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
       - name: Build Unity Web
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           unityVersion: 6000.3.6f1
-          targetPlatform: Web
+          targetPlatform: WebGL
           allowDirtyBuild: true
 
       - name: Upload build artifact
