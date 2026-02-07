@@ -18,17 +18,16 @@ jobs:
 
       - name: Build Unity Web
         uses: game-ci/unity-builder@v4
-	with:
- 	  unityVersion: 6000.3.6f1
-  	  targetPlatform: Web
-  	  projectPath: battle
-	  allowDirtyBuild: true
+        with:
+          unityVersion: 6000.3.6f1
+          targetPlatform: Web
+          allowDirtyBuild: true
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: web-build
-          path: battle/Build/
+          path: build/
 
   # ---------- STAGING DEPLOY ----------
   deploy-staging:
