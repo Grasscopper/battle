@@ -10,26 +10,46 @@ jobs:
 
   # ---------- BUILD JOB ----------
   build:
-    runs-on: self-hosted
+    name: Build WebGL
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Build WebGL on my Mac
-        run: >
-          "/Applications/Unity/Hub/Editor/2022.3.62f3/Unity.app/Contents/MacOS/Unity" 
-          -batchmode -quit -projectPath . 
-          -executeMethod UnityEditor.BuildPipeline.BuildPlayer 
-          -buildTarget WebGL 
-          -logFile buildlog.txt 
-          -customBuildTarget WebGL 
-          -customBuildName WebGL 
-          -customBuildPath build/WebGL
+      # Cache Unity build dependencies
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/unity3d
+            ~/.local/share/unity3d
+          key: ${{ runner.os }}-unity-cache
 
-      - name: Upload build artifact
+      # Activate Unity license
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+      # Build WebGL
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: WebGL
+          unityVersion: 2022.3.0f1   # ← change to your project version
+
+      # Upload build artifact (WebGL files)
+      - name: Upload build
         uses: actions/upload-artifact@v4
         with:
           name: WebGL-Build
-          path: build/WebGL/
+          path: build/WebGL
 
 
   # ---------- STAGING DEPLOY ----------
