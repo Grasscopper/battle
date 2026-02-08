@@ -31,7 +31,7 @@ jobs:
 
       # Activate Unity license
       - name: Activate Unity
-        uses: game-ci/unity-activate@v4
+        uses: game-ci/unity-activate-license@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
