@@ -10,21 +10,24 @@ jobs:
 
   # ---------- BUILD JOB ----------
   build:
-    name: Build WebGL
-    # Due to Unity personal license restrictions, I must use a self - hosted runner
-    if: github.actor == 'Grasscopper'
-
-    runs-on:
-      - self-hosted
-      - macOS
-      - unity-macos
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache Unity
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/unity3d
+            ~/.local/share/unity3d
+          key: unity-cache-${{ runner.os }}-${{ hashFiles('**/*.cs', '**/*.unity', '**/*.prefab') }}
+
       - name: Build Unity WebGL
+        id: build
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2022.3.62f3
           targetPlatform: WebGL
@@ -34,8 +37,8 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: web-build
-          path: ./build/WebGL/
+          name: WebGL-Build
+          path: build/WebGL/
 
 
   # ---------- STAGING DEPLOY ----------
@@ -47,7 +50,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: web-build
+          name: WebGL-Build
+          path: webgl
 
       - name: Configure AWS Credentials (STAGING)
         uses: aws-actions/configure-aws-credentials@v4
@@ -58,9 +62,9 @@ jobs:
 
       - name: Sync build to STAGING bucket
         run: |
-          cd ./web-build
-
-          aws s3 sync . s3://staging.haldom.net/ --delete
+          cd webgl
+          echo "Uploading WebGL build to staging.haldom.net ..."
+          aws s3 sync . s3://staging.haldom.net/ --delete --acl public-read
 
       - name: Invalidate STAGING CloudFront
         run: |
@@ -78,7 +82,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: web-build
+          name: WebGL-Build
+          path: webgl
 
       - name: Configure AWS Credentials (PRODUCTION)
         uses: aws-actions/configure-aws-credentials@v4
@@ -89,9 +94,9 @@ jobs:
 
       - name: Sync build to PRODUCTION bucket
         run: |
-          cd ./web-build
-
-          aws s3 sync . s3://haldom.net/ --delete
+          cd webgl
+          echo "Uploading WebGL build to haldom.net ..."
+          aws s3 sync . s3://haldom.net/ --delete --acl public-read
 
       - name: Invalidate PRODUCTION CloudFront
         run: |
