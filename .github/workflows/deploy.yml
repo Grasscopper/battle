@@ -1,96 +1,32 @@
-name: Build and Deploy Unity Web
+name: Build WebGL
 
 on:
   push:
-    branches:
-      - staging
-      - main
+    branches: [ "main" ]
+  pull_request:
 
 jobs:
-
-  # ---------- BUILD JOB ----------
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: game-ci/unity-activate@v2
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - uses: game-ci/unity-builder@v4
+      - name: Build Project
+        uses: game-ci/unity-builder@v4
         with:
           targetPlatform: WebGL
-          unityVersion: 2022.3.0f1
+          unityVersion: 2022.3.0f1    # ← match your project version
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload WebGL build
+        uses: actions/upload-artifact@v4
         with:
           name: WebGL-Build
           path: build/WebGL
-
-
-  # ---------- STAGING DEPLOY ----------
-  deploy-staging:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/staging'
-
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: WebGL-Build
-          path: webgl
-
-      - name: Configure AWS Credentials (STAGING)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
-          aws-region: us-east-1
-
-      - name: Sync build to STAGING bucket
-        run: |
-          cd webgl
-          echo "Uploading WebGL build to staging.haldom.net ..."
-          aws s3 sync . s3://staging.haldom.net/ --delete --acl public-read
-
-      - name: Invalidate STAGING CloudFront
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id d2qchnc5zprwef \
-            --paths "/*"
-
-
-  # ---------- PRODUCTION DEPLOY ----------
-  deploy-production:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: WebGL-Build
-          path: webgl
-
-      - name: Configure AWS Credentials (PRODUCTION)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Sync build to PRODUCTION bucket
-        run: |
-          cd webgl
-          echo "Uploading WebGL build to haldom.net ..."
-          aws s3 sync . s3://haldom.net/ --delete --acl public-read
-
-      - name: Invalidate PRODUCTION CloudFront
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id E25J6ZW46HS9ZK \
-            --paths "/*"
