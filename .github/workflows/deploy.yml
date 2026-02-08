@@ -18,6 +18,12 @@ jobs:
       - uses: game-ci/unity-activate@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      - name: Activate Unity license
+        uses: game-ci/unity-activate@v2
+        with:
+          # The action automatically uses the secrets if named correctly
+          unity-email: ${{ secrets.UNITY_EMAIL }}
+          unity-password: ${{ secrets.UNITY_PASSWORD }}
 
       - uses: game-ci/unity-builder@v4
         with:
