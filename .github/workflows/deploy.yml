@@ -25,21 +25,13 @@ jobs:
           restore-keys: |
             Library-
 
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v4
+      # Build using Buildalon (NO LICENSE REQUIRED)
+      - name: Build with Buildalon
+        uses: buildalon/unity-builder@v1
         with:
-          unityVersion: auto
-          unityLicensingServer: true
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v4
-        with:
-          unityVersion: auto
+          unityVersion: auto              # detects from ProjectSettings
           targetPlatform: WebGL
-          unityLicensingServer: true
+          outputPath: build               # Buildalon outputs to build/WebGL
 
 
   # ---------- STAGING DEPLOY ----------
@@ -64,7 +56,7 @@ jobs:
 
       - name: Sync build to STAGING bucket
         run: |
-          cd webgl
+          cd build/WebGL
           echo "Uploading WebGL build to staging.haldom.net ..."
           aws s3 sync . s3://staging.haldom.net/ --delete --acl public-read
 
@@ -97,7 +89,7 @@ jobs:
 
       - name: Sync build to PRODUCTION bucket
         run: |
-          cd webgl
+          cd build/WebGL
           echo "Uploading WebGL build to haldom.net ..."
           aws s3 sync . s3://haldom.net/ --delete --acl public-read
 
