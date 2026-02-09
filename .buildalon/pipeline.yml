@@ -1,0 +1,31 @@
+version: 1
+
+pipelines:
+  build-and-deploy-staging:
+    displayName: Build & Deploy (Staging)
+    trigger:
+      type: git
+      branches:
+        include:
+          - staging
+
+    steps:
+      # 1. Unity Cloud Build with Buildalon
+      - name: Build WebGL
+        uses: buildalon/unity-build@v1
+        with:
+          unityVersion: 2022.3.62f3
+          targetPlatform: WebGL
+          outputPath: build/WebGL
+
+      # 2. Upload to S3
+      - name: Upload to S3
+        run: |
+          aws s3 sync build/WebGL s3://staging.haldom.net --delete --acl public-read
+
+      # 3. Invalidate CloudFront cache
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ERR6QJMIL9KXX \
+            --paths "/*"
