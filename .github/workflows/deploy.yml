@@ -26,7 +26,7 @@ jobs:
             Library-
 
       - name: Activate Unity License
-        uses: game-ci/unity-activate@v4
+        uses: game-ci/unity-activate@v4.8.5
         with:
           activateUnityLicensingServer: true
           unityVersion: 2022.3.62.f3
