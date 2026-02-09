@@ -29,13 +29,17 @@ jobs:
       - name: Run tests
         uses: game-ci/unity-test-runner@v4
         with:
+          unityVersion: auto
+          unityLicensingServer: true
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Build
       - name: Build project
-        uses: game-ci/unity-builder@v4.8.1
+        uses: game-ci/unity-builder@v4
         with:
+          unityVersion: auto
           targetPlatform: WebGL
+          unityLicensingServer: true
 
 
   # ---------- STAGING DEPLOY ----------
