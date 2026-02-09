@@ -25,19 +25,21 @@ jobs:
           restore-keys: |
             Library-
 
+      - name: Activate Unity License
+        uses: game-ci/unity-activate@v4
+        with:
+          activateUnityLicensingServer: true
+          unityVersion: 2022.3.62.f3
+
       # Test
       - name: Run tests
         uses: game-ci/unity-test-runner@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v4.8.1
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
 
