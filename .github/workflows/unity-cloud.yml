@@ -1,0 +1,19 @@
+name: Trigger Unity Cloud Build
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Unity Cloud Build
+        run: |
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Basic $UNITY_API_KEY" \
+          -d '{"clean": false}' \
+          https://build-api.cloud.unity3d.com/api/v1/orgs/$ORG_ID/projects/$PROJECT_GUID/buildtargets/$BUILD_TARGET/builds
