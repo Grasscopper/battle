@@ -5,7 +5,7 @@ on:
     branches:
       - staging
       - main
-
+# No way this works
 jobs:
   trigger-build:
     runs-on: ubuntu-latest
